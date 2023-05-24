@@ -32,7 +32,7 @@ echo "Installing Atlas using build directory $1" | arrow
 
 PACKAGE="https://release.ariga.io/atlas/atlas-linux-amd64-latest"
 
-ATLAS_VENDOR="$BUILD_DIR/vendor/atlas"
+ATLAS_VENDOR="$BUILD_DIR/vendor"
 rm -rf $ATLAS_VENDOR/*
 mkdir -p $ATLAS_VENDOR/bin
 
@@ -47,7 +47,7 @@ curl -L -o "atlas-linux-amd64-latest" -A "$_ua" $PACKAGE
 install "atlas-linux-amd64-latest" $ATLAS_SOURCE_DIR | indent
 
 # Extracted binary lives here
-ATLAS_SOURCE_BINARY="$ATLAS_SOURCE_DIR/atlas-linux-amd64-latest"
+ATLAS_SOURCE_BINARY="$ATLAS_SOURCE_DIR/bin/atlas"
 mv $ATLAS_SOURCE_BINARY $ATLAS_VENDOR/bin/atlas
 
 # Don't keep anything around
