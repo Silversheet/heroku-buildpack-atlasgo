@@ -41,7 +41,7 @@ rm -rf $ATLAS_SOURCE_DIR
 mkdir -p $ATLAS_SOURCE_DIR
 
 echo "Fetching atlas binaries" | indent
-curl $PACKAGE -L -o - | install "$ATLAS_SOURCE_DIR/atlas-linux-amd64-latest" | indent
+curl $PACKAGE -L -o - | install "$ATLAS_SOURCE_DIR/atlas-linux-amd64-latest" "/usr/local/bin/atlas"| indent
 
 # Extracted binary lives here
 ATLAS_SOURCE_BINARY="$ATLAS_SOURCE_DIR/atlas-linux-amd64-latest"
@@ -60,3 +60,4 @@ echo 'export PATH="$HOME/bin:$PATH"' > $BUILD_DIR/.profile.d/atlas
 
 cat <<EOF > export
 export PATH=$BUILD_DIR/bin:$PATH
+EOF
