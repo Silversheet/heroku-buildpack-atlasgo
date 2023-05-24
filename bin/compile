@@ -36,7 +36,7 @@ ATLAS_VENDOR="$BUILD_DIR/vendor"
 rm -rf $ATLAS_VENDOR/*
 mkdir -p $ATLAS_VENDOR/bin
 
-ATLAS_SOURCE_DIR="$ATLAS_VENDOR/atlas"
+ATLAS_SOURCE_DIR="$ATLAS_VENDOR/bin"
 rm -rf $ATLAS_SOURCE_DIR
 mkdir -p $ATLAS_SOURCE_DIR
 
@@ -47,7 +47,7 @@ curl -L -o "atlas-linux-amd64-latest" -A "$_ua" $PACKAGE
 install "atlas-linux-amd64-latest" $ATLAS_SOURCE_DIR | indent
 
 # Extracted binary lives here
-ATLAS_SOURCE_BINARY="$ATLAS_SOURCE_DIR/bin/atlas"
+ATLAS_SOURCE_BINARY="$ATLAS_SOURCE_DIR/atlas-linux-amd64-latest"
 mv $ATLAS_SOURCE_BINARY $ATLAS_VENDOR/bin/atlas
 
 # Don't keep anything around
