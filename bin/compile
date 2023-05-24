@@ -19,7 +19,7 @@ arrow() {
   sed -u 's/^/-----> /'
 }
 
-echo "Installing Ghostscript using build directory $1" | arrow
+echo "Installing Atlas using build directory $1" | arrow
 
 curl -sSf https://atlasgo.sh | sh
 
