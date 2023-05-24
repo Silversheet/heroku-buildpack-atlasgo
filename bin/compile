@@ -58,7 +58,7 @@ mkdir -p $BUILD_DIR/bin
 rm "atlas-linux-amd64-latest"
 
 echo "Setting up atlas environment" | indent
-cp -R "$ATLAS_VENDOR/bin/*" $BUILD_DIR/bin/
+cp -R $ATLAS_VENDOR/bin/* $BUILD_DIR/bin/
 
 mkdir -p $BUILD_DIR/.profile.d
 echo 'export PATH="$HOME/bin:$PATH"' > $BUILD_DIR/.profile.d/atlas
