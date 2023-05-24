@@ -21,11 +21,42 @@ arrow() {
 
 echo "Installing Atlas using build directory $1" | arrow
 
-curl -sSf https://atlasgo.sh | sh
+# curl -sSf https://atlasgo.sh | sh
+
+# mkdir -p $BUILD_DIR/.profile.d
+# echo 'export PATH="$HOME/bin:$PATH"' > $BUILD_DIR/.profile.d/atlas
+#
+# cat <<EOF > export
+# export PATH=$BUILD_DIR/bin:$PATH
+# EOF
+
+PACKAGE="https://release.ariga.io/atlas/atlas-linux-amd64-latest"
+
+ATLAS_VENDOR="$BUILD_DIR/vendor/atlas"
+rm -rf $ATLAS_VENDOR/*
+mkdir -p $ATLAS_VENDOR/bin
+
+ATLAS_SOURCE_DIR="$ATLAS_VENDOR/atlas"
+rm -rf $ATLAS_SOURCE_DIR
+mkdir -p $ATLAS_SOURCE_DIR
+
+echo "Fetching atlas binaries" | indent
+curl $PACKAGE -L -o - | tar xzf - -C $ATLAS_SOURCE_DIR 2>&1 | indent
+
+# Extracted binary lives here
+ATLAS_SOURCE_BINARY="$GS_SOURCE_DIR/atlas-linux-amd64-latest"
+mv $ATLAS_SOURCE_BINARY $ATLAS_VENDOR/bin/atlas
+
+# Don't keep anything around
+rm -rf $ATLAS_SOURCE_DIR
+
+mkdir -p $BUILD_DIR/bin
+
+echo "Setting up ghostscript environment" | indent
+cp -R $ATLAS_VENDOR/bin/* $BUILD_DIR/bin/
 
 mkdir -p $BUILD_DIR/.profile.d
 echo 'export PATH="$HOME/bin:$PATH"' > $BUILD_DIR/.profile.d/atlas
 
 cat <<EOF > export
 export PATH=$BUILD_DIR/bin:$PATH
-EOF
