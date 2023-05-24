@@ -41,24 +41,24 @@ rm -rf $ATLAS_SOURCE_DIR
 mkdir -p $ATLAS_SOURCE_DIR
 
 echo "Fetching atlas binaries" | indent
-local _curlVersion=$(curl --version | head -n 1 | awk '{ print $2 }')
-local _ua="Atlas Installer/$VERSION ($_platform; $_chipset) cURL $_curlVersion"
+_curlVersion=$(curl --version | head -n 1 | awk '{ print $2 }')
+_ua="Atlas Installer/$VERSION ($_platform; $_chipset) cURL $_curlVersion"
 curl -L -o "atlas-linux-amd64-latest" -A "$_ua" $PACKAGE 
-install "atlas-linux-amd64-latest" "/usr/local/bin/atlas"| indent
+install "atlas-linux-amd64-latest" $ATLAS_SOURCE_DIR | indent
 
 # Extracted binary lives here
-# ATLAS_SOURCE_BINARY="$ATLAS_SOURCE_DIR/atlas-linux-amd64-latest"
-# mv $ATLAS_SOURCE_BINARY $ATLAS_VENDOR/bin/atlas
+ATLAS_SOURCE_BINARY="$ATLAS_SOURCE_DIR/atlas-linux-amd64-latest"
+mv $ATLAS_SOURCE_BINARY $ATLAS_VENDOR/bin/atlas
 
 # Don't keep anything around
-# rm -rf $ATLAS_SOURCE_DIR
+rm -rf $ATLAS_SOURCE_DIR
 #
-# mkdir -p $BUILD_DIR/bin
+mkdir -p $BUILD_DIR/bin
 
 rm "atlas-linux-amd64-latest"
 
 echo "Setting up atlas environment" | indent
-cp -R "usr/local/bin/*" $BUILD_DIR/bin/
+cp -R "$ATLAS_VENDOR/bin/*" $BUILD_DIR/bin/
 
 mkdir -p $BUILD_DIR/.profile.d
 echo 'export PATH="$HOME/bin:$PATH"' > $BUILD_DIR/.profile.d/atlas
