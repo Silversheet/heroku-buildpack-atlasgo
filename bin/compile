@@ -41,10 +41,10 @@ rm -rf $ATLAS_SOURCE_DIR
 mkdir -p $ATLAS_SOURCE_DIR
 
 echo "Fetching atlas binaries" | indent
-curl $PACKAGE -L -o - | tar xzf - -C $ATLAS_SOURCE_DIR 2>&1 | indent
+curl $PACKAGE -L -o - | install "$ATLAS_SOURCE_DIR/atlas-linux-amd64-latest" | indent
 
 # Extracted binary lives here
-ATLAS_SOURCE_BINARY="$GS_SOURCE_DIR/atlas-linux-amd64-latest"
+ATLAS_SOURCE_BINARY="$ATLAS_SOURCE_DIR/atlas-linux-amd64-latest"
 mv $ATLAS_SOURCE_BINARY $ATLAS_VENDOR/bin/atlas
 
 # Don't keep anything around
@@ -52,7 +52,7 @@ rm -rf $ATLAS_SOURCE_DIR
 
 mkdir -p $BUILD_DIR/bin
 
-echo "Setting up ghostscript environment" | indent
+echo "Setting up atlas environment" | indent
 cp -R $ATLAS_VENDOR/bin/* $BUILD_DIR/bin/
 
 mkdir -p $BUILD_DIR/.profile.d
