@@ -32,7 +32,7 @@ echo "Installing Atlas using build directory $1" | arrow
 
 PACKAGE="https://release.ariga.io/atlas/atlas-linux-amd64-latest"
 
-ATLAS_VENDOR="$BUILD_DIR/vendor"
+ATLAS_VENDOR="$BUILD_DIR/vendor/atlas"
 rm -rf $ATLAS_VENDOR/*
 mkdir -p $ATLAS_VENDOR/bin
 
@@ -51,7 +51,7 @@ ATLAS_SOURCE_BINARY="$ATLAS_SOURCE_DIR/atlas-linux-amd64-latest"
 mv $ATLAS_SOURCE_BINARY $ATLAS_VENDOR/bin/atlas
 
 # Don't keep anything around
-rm -rf $ATLAS_SOURCE_DIR
+# rm -rf $ATLAS_SOURCE_DIR
 #
 mkdir -p $BUILD_DIR/bin
 
