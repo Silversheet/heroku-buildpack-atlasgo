@@ -1,0 +1,31 @@
+#!/bin/bash
+# bin/compile <build-dir> <cache-dir>
+
+# set -e
+
+# debug
+set -x
+
+# parse and derive params
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
+indent() {
+  sed -u 's/^/       /'
+}
+
+arrow() {
+  sed -u 's/^/-----> /'
+}
+
+echo "Installing Ghostscript using build directory $1" | arrow
+
+curl -sSf https://atlasgo.sh | sh
+
+mkdir -p $BUILD_DIR/.profile.d
+echo 'export PATH="$HOME/bin:$PATH"' > $BUILD_DIR/.profile.d/atlas
+
+cat <<EOF > export
+export PATH=$BUILD_DIR/bin:$PATH
+EOF
